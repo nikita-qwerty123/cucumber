@@ -4,10 +4,13 @@ import configuretions.BaseClass;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 import pageobjects.HillelCertificateTest;
+
+import java.util.concurrent.TimeUnit;
 
 public class Steps extends BaseClass {
     static HillelCertificateTest hillelCertificateTest = PageFactory.initElements(driver, HillelCertificateTest.class);
@@ -23,9 +26,8 @@ public class Steps extends BaseClass {
 
     @Then("Check that message is displayed")
     public void checkThatMessageIsDisplayed() {
-        System.out.println(hillelCertificateTest.getMessage());
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-
-
+        Assert.assertEquals("Сертифікат не знайдено",hillelCertificateTest.getMessage());
     }
 }
